@@ -6,7 +6,7 @@ const Web3 = require('web3');
 var nosql = require('nosql').load('database.nosql');
 // use the given Provider, e.g in Mist, or instantiate a new websocket provider
 const web3 = new Web3(Web3.givenProvider || gethWebsocketUrl);
-const unlockAccount = require('../unlock');
+const unlockAccount = require('./unlock');
 
 module.exports = async function clientRegister(data) {
     let IdP_Abi = config.IdP.abi;
@@ -38,7 +38,7 @@ module.exports = async function clientRegister(data) {
                 result.status = true;
                 let result_event = JSON.stringify(result);
                 //fs.writeFileSync('./releaseToken.json', result_event);
-                nosql.insert({ clientID: clientID, timestamp: timestamp});
+                nosql.insert({ clientID: clientID,clientAddress:nowAccount,IdPAddress:IdP_Address, timestamp: timestamp});
                 //送出驗證求取伺服器ip授權層序
                 //回傳值*/
                 //resolve(receipt.events.participantAdded.returnValues.newParticipant);

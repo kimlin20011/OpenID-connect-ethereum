@@ -3,13 +3,11 @@ const fs = require('fs');
 require('dotenv').config();
 
 //讀進合約abi,bytecode
-const RM_Abi = JSON.parse(fs.readFileSync('./migrate/uma_sol_Resource_management_contract.abi').toString());
-const RM_Bytecode = '0x' + fs.readFileSync('./migrate/uma_sol_Resource_management_contract.bin').toString();
-const Auth_Abi = JSON.parse(fs.readFileSync('./migrate/uma_sol_Authorization_contract.abi').toString());
-const Auth_Bytecode = '0x' + fs.readFileSync('./migrate/uma_sol_Authorization_contract.bin').toString();
+const IdP_Abi = JSON.parse(fs.readFileSync('./migrates/IdP.abi').toString());
+const IdP_Bytecode = '0x' + fs.readFileSync('./migrates/IdP.bin').toString();
 
 module.exports ={
-    port: 3001,
+    port: 3004,
     IdP: {
         abi: IdP_Abi,
         bytecode: IdP_Bytecode,
@@ -20,7 +18,7 @@ module.exports ={
         rqp_account: `0x2cf0622bdcdb80a295669c1c1548b0601ec2c41b`,
         //暫時不用
         password: process.env.password,
-        gethWebsocketUrl:`ws://localhost:8546`,
+        gethWebsocketUrl:`ws://localhost:8545`,
         //keystoreDir:`C:\\Users\\nccu\\implement\\chain_new\\data\\keystore`
         keystoreDir:`/Users/nccu/Documents/implement/chain_new/data/keystore`
     },

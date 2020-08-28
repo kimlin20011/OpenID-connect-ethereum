@@ -5,8 +5,7 @@
 const router = require('koa-router')();
 
 const blockchain_router = require('./blockchain');
-const authServer = require('./authServer');
-const authServer_controller = require('../controllers/offchain_controller');
+const authServer_controller = require('../controllers/authServer');
 
 router.use('/blockchain', blockchain_router.routes(), blockchain_router.allowedMethods());
 //authorizationEndpoint
@@ -15,5 +14,5 @@ router.use('/blockchain', blockchain_router.routes(), blockchain_router.allowedM
 //router.use('/token', authServer.routes(), authServer.allowedMethods());
 
 module.exports = router
-    .get('/authorize', authServer_controller.requestResource)
-    .post('/token', authServer_controller.requestResource);
+    .get('/authorize', authServer_controller.authorize)
+    //.post('/token', authServer_controller.requestResource);
