@@ -2,6 +2,7 @@ const clientRegister = require('../models/IdP_contract/clientRegister');
 const deploy = require('../models/IdP_contract/deploy');
 const authenticationRequest = require('../models/IdP_contract/authenticationRequest');
 const requestToken = require('../models/IdP_contract/requestToken');
+const tokenExchange = require('../models/IdP_contract/tokenExchange');
 
 module.exports = {
     async deploy(ctx) {
@@ -39,10 +40,18 @@ module.exports = {
     },
     async requestToken(ctx) {
         let formData = ctx.request.body;
-        //let res = {}; 
         try{
             let requestToken_result = await requestToken(formData);
             ctx.body = requestToken_result;
+        } catch(error) {
+            ctx.body = error;
+        }
+    },
+    async tokenExchange(ctx) {
+        let formData = ctx.request.body;
+        try{
+            let tokenExchange_result = await tokenExchange(formData);
+            ctx.body = tokenExchange_result;
         } catch(error) {
             ctx.body = error;
         }

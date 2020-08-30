@@ -6,3 +6,4 @@ module.exports = router
     .post(`/clientRegister`, IdP.clientRegister)
     .post(`/authenticationRequest`, IdP.authenticationRequest)
     .post(`/token`, IdP.requestToken)
+    .post(`/tokenExchange`, IdP.tokenExchange)
