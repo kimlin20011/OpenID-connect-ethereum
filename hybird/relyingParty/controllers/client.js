@@ -1,4 +1,4 @@
-const authorize = require('../models/authzServer/authorize');
+const authorize = require('../models/authorize');
 
 module.exports = {
     async authorize(ctx) {
@@ -8,8 +8,10 @@ module.exports = {
         try{
             let authorize_result = await authorize(queryData);
             res = authorize_result;
+            //ctx.body = res;
+            ctx.status = 308;
             ctx.body = res;
-            ctx.render('/approve.html', {client: client, scope: rscope});
+            ctx.redirect('http://localhost:3004/authorize');
         } catch(error) {
             ctx.body = error;
         }
