@@ -1,12 +1,13 @@
 "use strict";
 const config = require('../../configs/config');
 let gethWebsocketUrl = config.geth.gethWebsocketUrl;
+const fs = require('fs');
 const Web3 = require('web3');
-let Client_nosql = require('nosql').load('client.nosql');
+//let Client_nosql = require('nosql').load('client.nosql');
 // use the given Provider, e.g in Mist, or instantiate a new websocket provider
 const web3 = new Web3(Web3.givenProvider || gethWebsocketUrl);
-const unlockAccount = require('./unlock');
-const getIdPaddress = require('./getIdPaddress.js');
+const unlockAccount = require('../unlock');
+//const getIdPaddress = require('./getIdPaddress.js');
 
 module.exports = async function clientRegister(data) {
     let IdP_Abi = config.IdP.abi;
@@ -26,6 +27,8 @@ module.exports = async function clientRegister(data) {
         return;
     }
 
+    //await Client_nosql.clear();
+
     return new Promise((resolve, reject) => {
         let result ={};
         IdP.methods
@@ -37,8 +40,12 @@ module.exports = async function clientRegister(data) {
             .on("receipt", function(receipt) {
                 result.clientID = receipt.events.clientCreated.returnValues.clientId;
                 result.timestamp = receipt.events.clientCreated.returnValues.timestamp;
+                result.clientAddress=nowAccount;
+                result.IdPAddress = IdP_Address;
                 result.status = true;
-                Client_nosql.insert({ clientID: result.clientID,clientAddress:nowAccount,IdPAddress:IdP_Address, timestamp: result.timestamp });
+                //let result_event = JSON.stringify(result);
+                fs.writeFileSync('./client.json', JSON.stringify(result));
+                //Client_nosql.insert({ clientID: result.clientID,clientAddress:nowAccount,IdPAddress:IdP_Address, timestamp: result.timestamp });
                 //送出驗證求取伺服器ip授權層序
                 //回傳值*/
                 //resolve(receipt.events.participantAdded.returnValues.newParticipant);

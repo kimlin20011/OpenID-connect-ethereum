@@ -27,5 +27,9 @@ module.exports ={
         user: process.env.DATABASE_USER,
         password: process.env.DATABASE_PASSWORD,
         database: process.env.DATABASE
+    },
+    client:{
+        "redirect_uris": ["http://localhost:3006/callback"],
+        "scope": "openid_profile_email_phone_address"
     }
 };

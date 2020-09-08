@@ -14,5 +14,6 @@ const client_controller = require('../controllers/client');
 //router.use('/token', authServer.routes(), authServer.allowedMethods());
 
 module.exports = router
-    .get('/authorize', client_controller.authorize)
+    .get(`/authorize`, client_controller.authorize)
+    .post(`/clientRegister`, client_controller.clientRegister)
     //.post('/token', authServer_controller.requestResource);
