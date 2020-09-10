@@ -1,9 +1,6 @@
 'use strict';
 
-let rqpAddressButton = $('#rqpAddressButton');
-let policyClaimButton = $('#policyClaimButton');
-let refreshPolicyButton = $('#refreshPolicyButton');
-
+let titleInfo = $('#titleInfo');
 
 
 let claim_input = $('#claim_input');
@@ -29,7 +26,7 @@ let identifier = url.searchParams.get("identifier");
 log(`nowAccount：${nowAccount} \nAuth_address:${Auth_address}\nidentifier:${identifier}` );
 
 
-identifierText.html(`identifier:<br> ${identifier}`);
+titleInfo.text(`${clientName} want to access your infomation`);
 
 function log(...inputs) {
     for (let input of inputs) {
