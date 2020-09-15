@@ -4,7 +4,7 @@ const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
 const koaLogger = require('koa-logger');
 const static = require('koa-static');
-
+const cors = require('cors');
 const config = require('./configs/config');
 const routers = require('./routers/index');
 
@@ -18,6 +18,13 @@ app.use(koaLogger());
 
 // 配置ctx.body解析中间件
 app.use(bodyParser());
+app.use(cors());
+// app.use(async (ctx, next) => {
+//     ctx.set('Access-Control-Allow-Origin', '*');
+//     ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//     ctx.set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
+//     await next();
+//   });
 
 
 // 配置服务端模板渲染引擎中间件

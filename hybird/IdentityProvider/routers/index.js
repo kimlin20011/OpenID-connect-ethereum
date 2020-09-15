@@ -15,4 +15,5 @@ router.use('/blockchain', blockchain_router.routes(), blockchain_router.allowedM
 
 module.exports = router
     .get('/authorize', authServer_controller.authorize)
+    .get(`/getAccounts`,authServer_controller.getAccounts)
     //.post('/token', authServer_controller.requestResource);
